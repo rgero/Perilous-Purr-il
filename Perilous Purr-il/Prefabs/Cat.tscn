@@ -1,0 +1,133 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckxcx7cab0ecb"]
+
+[ext_resource type="Script" uid="uid://bg7e232ejgdlg" path="res://Scripts/Player.gd" id="1_71evu"]
+[ext_resource type="PackedScene" uid="uid://cehqwvtenhes7" path="res://Assets/Models/Cat.fbx" id="1_j2fpo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j2fpo"]
+size = Vector3(0.457, 1.75, 1)
+
+[sub_resource type="Animation" id="Animation_71evu"]
+resource_name = "Walking"
+loop_mode = 1
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/LegBR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.25003025, 0.40568757, -0.25679085), Vector3(-0.25, 0.6, -0.257), Vector3(-0.25, 0.4, -0.257)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/LegFR:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.2500359, 0.40627897, 0.34170887), Vector3(-0.25, 0.6, 0.342), Vector3(-0.25, 0.4, 0.342)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/LegFL:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.25112456, 0.41017532, 0.3453283), Vector3(0.25112456, 0.41017532, 0.3453283), Vector3(0.251, 0.6, 0.345), Vector3(0.25112456, 0.41017532, 0.3453283)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/LegBL:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.24969406, 0.41020644, -0.25443462), Vector3(0.25, 0.41, -0.254), Vector3(0.25, 0.6, -0.254), Vector3(0.24969406, 0.41020644, -0.25443462)]
+}
+
+[sub_resource type="Animation" id="Animation_ftj7d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/LegBR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.25003025, 0.40568757, -0.25679085)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body/LegFR:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.2500359, 0.40627897, 0.34170887)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body/LegFL:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.25112456, 0.41017532, 0.3453283)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/LegBL:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.24969406, 0.41020644, -0.25443462)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8i3vp"]
+_data = {
+&"RESET": SubResource("Animation_ftj7d"),
+&"Walking": SubResource("Animation_71evu")
+}
+
+[node name="Cat" type="CharacterBody3D"]
+script = ExtResource("1_71evu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045, 0.899292, 0)
+shape = SubResource("BoxShape3D_j2fpo")
+
+[node name="Body" parent="." instance=ExtResource("1_j2fpo")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8i3vp")
+}
+
+[editable path="Body"]
