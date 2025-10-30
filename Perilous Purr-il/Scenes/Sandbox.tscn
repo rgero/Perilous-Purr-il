@@ -27,3 +27,4 @@ size = Vector3(50, 0.2, 50)
 material = SubResource("StandardMaterial3D_eo7g3")
 
 [node name="Cat" parent="." instance=ExtResource("2_eo7g3")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
