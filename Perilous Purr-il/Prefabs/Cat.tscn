@@ -116,7 +116,7 @@ _data = {
 &"Walking": SubResource("Animation_71evu")
 }
 
-[node name="Cat" type="CharacterBody3D"]
+[node name="Cat" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_71evu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

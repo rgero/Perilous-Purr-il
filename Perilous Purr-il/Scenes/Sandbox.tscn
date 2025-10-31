@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvw8tq3t6ispd"]
+[gd_scene load_steps=7 format=3 uid="uid://cvw8tq3t6ispd"]
 
 [ext_resource type="Texture2D" uid="uid://i36mmxylctp3" path="res://Materials/prototype-texture.png" id="1_qotlx"]
 [ext_resource type="PackedScene" uid="uid://ckxcx7cab0ecb" path="res://Prefabs/Cat.tscn" id="2_eo7g3"]
+[ext_resource type="PackedScene" uid="uid://comhd4eavf72f" path="res://Prefabs/Enemy.tscn" id="4_j25i0"]
 
 [sub_resource type="Environment" id="Environment_qotlx"]
 background_mode = 2
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_xqu6k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eo7g3"]
 albedo_texture = ExtResource("1_qotlx")
@@ -13,7 +16,7 @@ uv1_triplanar = true
 [node name="Sandbox" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.64572424, 0.76357067, 0, -0.76357067, 0.64572424, 0, 4.6453238, 8.054621)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 10, 10)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.4351683, 0.90034914, 0, -0.90034914, 0.4351683, 0, 20, 0)
@@ -21,10 +24,16 @@ transform = Transform3D(1, 0, 0, 0, 0.4351683, 0.90034914, 0, -0.90034914, 0.435
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qotlx")
 
-[node name="Floor" type="CSGBox3D" parent="."]
+[node name="Cat" parent="." instance=ExtResource("2_eo7g3")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Enemy" parent="." instance=ExtResource("4_j25i0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_xqu6k")
+
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
 use_collision = true
 size = Vector3(50, 0.2, 50)
 material = SubResource("StandardMaterial3D_eo7g3")
-
-[node name="Cat" parent="." instance=ExtResource("2_eo7g3")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
