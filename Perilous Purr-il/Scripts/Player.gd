@@ -3,6 +3,19 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@export var playerCamera: PackedScene
+@export var cameraOffset: Vector3
+
+var cameraInstance: Node
+
+func _ready() -> void:
+	cameraInstance = playerCamera.instantiate()
+	get_tree().current_scene.add_child.call_deferred(cameraInstance)
+	cameraInstance.global_position += cameraOffset
+	
+func _process(_delta: float) -> void:
+	cameraInstance.global_position = global_position + cameraOffset
+	cameraInstance.look_at(global_position)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
