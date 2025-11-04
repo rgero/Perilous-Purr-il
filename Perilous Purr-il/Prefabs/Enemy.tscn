@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://comhd4eavf72f"]
+[gd_scene load_steps=9 format=3 uid="uid://comhd4eavf72f"]
 
 [ext_resource type="PackedScene" uid="uid://x8t41u8l41he" path="res://Assets/Models/TempHuman.glb" id="1_8k53p"]
 [ext_resource type="Script" uid="uid://ltxqrk6f3ajf" path="res://Scripts/Enemy.gd" id="1_gti1y"]
@@ -214,7 +214,12 @@ _data = {
 &"Walking": SubResource("Animation_gti1y")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_gti1y"]
+radius = 9.0
+
 [node name="Enemy" type="CharacterBody3D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_gti1y")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -226,14 +231,25 @@ shape = SubResource("CapsuleShape3D_gti1y")
 [node name="TempHuman" parent="." instance=ExtResource("1_8k53p")]
 
 [node name="Left Arm" parent="TempHuman" index="4"]
-transform = Transform3D(0.9739758, -0.22665127, 0, 0.22665125, 0.97397584, 0, 0, 0, 1, 0.80919975, 2.2633624, 0)
+transform = Transform3D(0.9739758, -0.22665125, 0, 0.22665125, 0.9739758, 0, 0, 0, 1, 0.80919975, 2.2633624, 0)
 
 [node name="Right Arm" parent="TempHuman" index="5"]
-transform = Transform3D(0.9739758, 0.22665127, 0, -0.22665125, 0.97397584, 0, 0, 0, 1, -0.8092, 2.2633624, 0)
+transform = Transform3D(0.9739758, 0.22665125, 0, -0.22665125, 0.9739758, 0, 0, 0, 1, -0.8092, 2.2633624, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_bftkq")
 }
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.040647, 0)
+shape = SubResource("SphereShape3D_gti1y")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
 
 [editable path="TempHuman"]

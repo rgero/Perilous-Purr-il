@@ -117,6 +117,7 @@ _data = {
 }
 
 [node name="Cat" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 2
 script = ExtResource("1_71evu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

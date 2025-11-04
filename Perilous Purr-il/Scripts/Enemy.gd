@@ -8,32 +8,29 @@ class_name Enemy
 
 @onready var navAgent: NavigationAgent3D = $NavigationAgent3D
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+@onready var collisonShape: CollisionShape3D = $Area3D/CollisionShape3D
 
-var player: Node3D
 var provoked := false
-var aggroRange = 15.0
-var damage := 20.0
-var health: float = maxHealth:
-	set(value):
-		health = value
-		provoked = true
-		if health <= 0:
-			queue_free()
-		
+var player: Node3D
+
+var spaceState: PhysicsDirectSpaceState3D
 
 func _ready() -> void:
-	player = get_tree().get_first_node_in_group("Player")
+
+	spaceState = get_world_3d().get_direct_space_state()
+	assert(spaceState != null, "Space State is fucked")
 
 func _process(_delta: float) -> void:
-	navAgent.target_position = player.global_position;
+	if player:
+		navAgent.target_position = player.global_position;
 	
 func _physics_process(delta: float) -> void:
-	var distance = global_position.distance_to(player.global_position)
-	if distance <= aggroRange:
-		provoked = true
-	else:
-		provoked = false
-		
+	#var distance = global_position.distance_to(player.global_position)
+	#if distance <= aggroRange:
+		#provoked = true
+	#else:
+		#provoked = false
+		#
 	ChasePlayer(delta)
 
 func ChasePlayer(delta: float) -> void:
@@ -68,3 +65,22 @@ func LookAtTarget(direction: Vector3) -> void:
 	var lookAtDirection = global_position + adjustedDirection
 	if global_position.distance_to(lookAtDirection) > 0.001:
 		look_at(lookAtDirection, Vector3.UP, true)
+
+func DetermineCanSee(body: Node3D) -> bool:
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = collisonShape.global_position
+	params.to = body.global_position
+	var raycastResult = spaceState.intersect_ray(params)
+	if raycastResult:
+		var hitObject = raycastResult["collider"]
+		return hitObject.is_in_group("Player")
+	return false
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if DetermineCanSee(body):
+		provoked = true
+		player = body
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	provoked = false
+	player = null

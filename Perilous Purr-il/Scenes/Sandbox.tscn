@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvw8tq3t6ispd"]
+[gd_scene load_steps=10 format=3 uid="uid://cvw8tq3t6ispd"]
 
 [ext_resource type="Texture2D" uid="uid://i36mmxylctp3" path="res://Materials/prototype-texture.png" id="1_qotlx"]
 [ext_resource type="PackedScene" uid="uid://ckxcx7cab0ecb" path="res://Prefabs/Cat.tscn" id="2_eo7g3"]
@@ -15,6 +15,12 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eo7g3"]
 albedo_texture = ExtResource("1_qotlx")
 uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j25i0"]
+size = Vector3(5, 5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n1lsy"]
+size = Vector3(5, 5, 1)
 
 [node name="Sandbox" type="Node3D"]
 
@@ -39,3 +45,14 @@ navigation_mesh = SubResource("NavigationMesh_xqu6k")
 use_collision = true
 size = Vector3(50, 0.2, 50)
 material = SubResource("StandardMaterial3D_eo7g3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.511671, 0, 4.2889733)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_j25i0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011375427, 2.4825454, 0.0036640167)
+mesh = SubResource("BoxMesh_n1lsy")
