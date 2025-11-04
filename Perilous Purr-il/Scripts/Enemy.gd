@@ -9,10 +9,9 @@ class_name Enemy
 @onready var navAgent: NavigationAgent3D = $NavigationAgent3D
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 
-
 var player: Node3D
 var provoked := false
-var aggroRange = 5.0
+var aggroRange = 15.0
 var damage := 20.0
 var health: float = maxHealth:
 	set(value):
@@ -25,7 +24,7 @@ var health: float = maxHealth:
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	navAgent.target_position = player.global_position;
 	
 func _physics_process(delta: float) -> void:
@@ -69,6 +68,3 @@ func LookAtTarget(direction: Vector3) -> void:
 	var lookAtDirection = global_position + adjustedDirection
 	if global_position.distance_to(lookAtDirection) > 0.001:
 		look_at(lookAtDirection, Vector3.UP, true)
-	
-func Attack() -> void:
-	player.health -= damage

@@ -6,6 +6,10 @@ const JUMP_VELOCITY = 4.5
 @export var playerCamera: PackedScene
 @export var cameraOffset: Vector3
 
+@export var sprintTime := 3.0
+@export var speedIncrease := 1.3
+var currentSprint := 0.0
+
 var cameraInstance: Node
 
 func _ready() -> void:
@@ -36,11 +40,20 @@ func _physics_process(delta: float) -> void:
 
 		# Movement should now use world space (not local transform)
 		var move_dir = Vector3(input_dir.x, 0, input_dir.y).normalized()
+		
 		velocity.x = move_dir.x * SPEED
 		velocity.z = move_dir.z * SPEED
+		
+		if Input.is_action_pressed("Sprint") and currentSprint < sprintTime:
+			velocity.x *= speedIncrease
+			velocity.z *= speedIncrease
+
 	else:
 		animation_player.stop()
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+	if not Input.is_action_pressed("Sprint"):
+		currentSprint = 0
 
 	move_and_slide()
