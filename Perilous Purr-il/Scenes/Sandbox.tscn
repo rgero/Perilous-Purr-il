@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvw8tq3t6ispd"]
+[gd_scene load_steps=11 format=3 uid="uid://cvw8tq3t6ispd"]
 
 [ext_resource type="Texture2D" uid="uid://i36mmxylctp3" path="res://Materials/prototype-texture.png" id="1_qotlx"]
 [ext_resource type="PackedScene" uid="uid://ckxcx7cab0ecb" path="res://Prefabs/Cat.tscn" id="2_eo7g3"]
 [ext_resource type="PackedScene" uid="uid://b5vxhtfhw1b2n" path="res://Prefabs/PlayerCamera.tscn" id="2_j25i0"]
 [ext_resource type="PackedScene" uid="uid://comhd4eavf72f" path="res://Prefabs/Enemy.tscn" id="4_j25i0"]
+[ext_resource type="PackedScene" uid="uid://pdixj2qlfrus" path="res://Assets/Models/TempBench.glb" id="5_n1lsy"]
 
 [sub_resource type="Environment" id="Environment_qotlx"]
 background_mode = 2
@@ -56,3 +57,6 @@ shape = SubResource("BoxShape3D_j25i0")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011375427, 2.4825454, 0.0036640167)
 mesh = SubResource("BoxMesh_n1lsy")
+
+[node name="TempBench" parent="." instance=ExtResource("5_n1lsy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.360546, 0, 0)
