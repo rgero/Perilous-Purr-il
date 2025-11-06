@@ -119,9 +119,6 @@ _data = {
 [node name="Cat" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_71evu")
-cameraOffset = null
-sprintTime = null
-speedIncrease = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045, 0.899292, 0)
