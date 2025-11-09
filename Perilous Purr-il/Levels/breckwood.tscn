@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=4 uid="uid://c70at8g6gynba"]
+
+[ext_resource type="Material" uid="uid://dlnqkl1ydnwkw" path="res://Materials/DefaultRoomMaterial.tres" id="1_gjrc1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gjrc1"]
+
+[sub_resource type="Sky" id="Sky_ysday"]
+sky_material = SubResource("ProceduralSkyMaterial_gjrc1")
+
+[sub_resource type="Environment" id="Environment_dtxk8"]
+background_mode = 2
+sky = SubResource("Sky_ysday")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ysday"]
+_surfaces = [{
+"aabb": AABB(-20, -0.125, -20, 40, 0.25, 40),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AACgwQAAAL4AAKBBAACgwQAAAL4AAKDBAACgwQAAAD4AAKDBAACgQQAAAL4AAKDBAACgwQAAAL4AAKDBAACgwQAAAL4AAKBBAACgwQAAAD4AAKDBAACgwQAAAL4AAKDBAACgQQAAAL4AAKDBAACgwQAAAD4AAKDBAACgwQAAAD4AAKBBAACgwQAAAL4AAKBBAACgwQAAAL4AAKBBAACgwQAAAD4AAKBBAACgQQAAAD4AAKBBAACgQQAAAD4AAKBBAACgwQAAAD4AAKBBAACgwQAAAD4AAKDBAACgwQAAAL4AAKBBAACgQQAAAL4AAKBBAACgQQAAAL4AAKDBAACgQQAAAD4AAKBBAACgQQAAAL4AAKBBAACgwQAAAL4AAKBBAACgQQAAAL4AAKDBAACgQQAAAL4AAKBBAACgQQAAAD4AAKBBAACgQQAAAL4AAKDBAACgQQAAAD4AAKDBAACgwQAAAD4AAKDBAACgwQAAAD4AAKDBAACgQQAAAD4AAKDBAACgQQAAAD4AAKBBAACgQQAAAD4AAKBBAACgQQAAAD4AAKDBAACgQQAAAL4AAKDBAAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dtxk8"]
+data = PackedVector3Array(-20, -0.125, 20, -20, -0.125, -20, -20, 0.125, -20, 20, -0.125, -20, -20, -0.125, -20, -20, -0.125, 20, -20, 0.125, -20, -20, -0.125, -20, 20, -0.125, -20, -20, 0.125, -20, -20, 0.125, 20, -20, -0.125, 20, -20, -0.125, 20, -20, 0.125, 20, 20, 0.125, 20, 20, 0.125, 20, -20, 0.125, 20, -20, 0.125, -20, -20, -0.125, 20, 20, -0.125, 20, 20, -0.125, -20, 20, 0.125, 20, 20, -0.125, 20, -20, -0.125, 20, 20, -0.125, -20, 20, -0.125, 20, 20, 0.125, 20, 20, -0.125, -20, 20, 0.125, -20, -20, 0.125, -20, -20, 0.125, -20, 20, 0.125, -20, 20, 0.125, 20, 20, 0.125, 20, 20, 0.125, -20, 20, -0.125, -20)
+
+[node name="Breckwood" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dtxk8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.90134937, 0.43309283, 0, -0.43309283, -0.90134937, 0, 7.8847475, -14.451007)
+
+[node name="Playfield" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+visible = false
+mesh = SubResource("ArrayMesh_ysday")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Playfield"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Playfield/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_dtxk8")
+
+[node name="LevelContents" type="Node3D" parent="."]
+
+[node name="House" type="CSGBox3D" parent="LevelContents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.18425, 1.5, 0)
+material_override = ExtResource("1_gjrc1")
+flip_faces = true
+size = Vector3(10, 3, 10)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="LevelContents/House"]
+
+[node name="Hallway" type="CSGBox3D" parent="LevelContents/House/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3402328, -0.5, -6.205331)
+material_override = ExtResource("1_gjrc1")
+flip_faces = true
+size = Vector3(2, 2, 3)
+
+[node name="Closet" type="CSGBox3D" parent="LevelContents/House/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.90412426, -0.5, -6.465942)
+material_override = ExtResource("1_gjrc1")
+flip_faces = true
+size = Vector3(2, 2, 3)
+
+[node name="Hallway3" type="CSGBox3D" parent="LevelContents/House/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.8094864, -0.3950646, -3.2932575)
+material_override = ExtResource("1_gjrc1")
+flip_faces = true
+size = Vector3(2, 2, 2.1628418)
+
+[node name="Hallway4" type="CSGBox3D" parent="LevelContents/House/CSGCombiner3D"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.9611826, -0.5, 4.0383816)
+material_override = ExtResource("1_gjrc1")
+flip_faces = true
+size = Vector3(2, 2, 2.1628418)
+
+[node name="Room2" type="CSGBox3D" parent="LevelContents/House/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.376431, 0, -0.55491257)
+material_override = ExtResource("1_gjrc1")
+flip_faces = true
+size = Vector3(8, 3, 10)
+
+[node name="Room3" type="CSGBox3D" parent="LevelContents/House/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.376431, 0, 8.819254)
+material_override = ExtResource("1_gjrc1")
+flip_faces = true
+size = Vector3(8, 3, 10)
+
+[node name="Hallway2" type="CSGBox3D" parent="LevelContents/House/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.0563154, -0.5, 11.61274)
+material_override = ExtResource("1_gjrc1")
+flip_faces = true
+size = Vector3(2, 2, 3)
+
+[node name="Closet2" type="CSGBox3D" parent="LevelContents/House/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6104965, -0.5, 9.696872)
+material_override = ExtResource("1_gjrc1")
+flip_faces = true
+size = Vector3(2, 2, 3)
