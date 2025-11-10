@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvw8tq3t6ispd"]
+[gd_scene load_steps=10 format=3 uid="uid://cvw8tq3t6ispd"]
 
 [ext_resource type="Texture2D" uid="uid://i36mmxylctp3" path="res://Materials/prototype-texture.png" id="1_qotlx"]
 [ext_resource type="PackedScene" uid="uid://ckxcx7cab0ecb" path="res://Prefabs/Cat.tscn" id="2_eo7g3"]
-[ext_resource type="PackedScene" uid="uid://b5vxhtfhw1b2n" path="res://Prefabs/PlayerCamera.tscn" id="2_j25i0"]
 [ext_resource type="PackedScene" uid="uid://comhd4eavf72f" path="res://Prefabs/Enemy.tscn" id="4_j25i0"]
 [ext_resource type="PackedScene" uid="uid://d0uduj2415xwk" path="res://Prefabs/Bench.tscn" id="5_n1lsy"]
 
@@ -33,7 +32,6 @@ environment = SubResource("Environment_qotlx")
 
 [node name="Cat" parent="." instance=ExtResource("2_eo7g3")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-playerCamera = ExtResource("2_j25i0")
 cameraOffset = Vector3(0, 10, 10)
 
 [node name="Enemy" parent="." instance=ExtResource("4_j25i0")]

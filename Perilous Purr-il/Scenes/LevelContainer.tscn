@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://saeb1724lr6i"]
+
+[ext_resource type="Script" uid="uid://d3khk1w1cd7dr" path="res://Scripts/Level.gd" id="1_55qk7"]
+[ext_resource type="PackedScene" uid="uid://c70at8g6gynba" path="res://Levels/breckwood.tscn" id="2_ltnw4"]
+[ext_resource type="PackedScene" uid="uid://ckxcx7cab0ecb" path="res://Prefabs/Cat.tscn" id="2_vpjj4"]
+
+[node name="Level" type="Node3D" node_paths=PackedStringArray("levelContainer")]
+script = ExtResource("1_55qk7")
+levelContainer = NodePath("Breckwood")
+selectedPlayerPrefab = ExtResource("2_vpjj4")
+
+[node name="Breckwood" parent="." instance=ExtResource("2_ltnw4")]
+
+[editable path="Breckwood"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckxcx7cab0ecb"]
+[gd_scene load_steps=8 format=3 uid="uid://ckxcx7cab0ecb"]
 
 [ext_resource type="Script" uid="uid://bg7e232ejgdlg" path="res://Scripts/Player.gd" id="1_71evu"]
 [ext_resource type="PackedScene" uid="uid://cehqwvtenhes7" path="res://Assets/Models/Cat.fbx" id="1_j2fpo"]
+[ext_resource type="PackedScene" uid="uid://b5vxhtfhw1b2n" path="res://Prefabs/PlayerCamera.tscn" id="2_ftj7d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j2fpo"]
 size = Vector3(0.457, 1.75, 1)
@@ -117,8 +118,11 @@ _data = {
 }
 
 [node name="Cat" type="CharacterBody3D" groups=["Player"]]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 collision_layer = 2
 script = ExtResource("1_71evu")
+playerCamera = ExtResource("2_ftj7d")
+cameraOffset = Vector3(0, 10, 10)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045, 0.899292, 0)
